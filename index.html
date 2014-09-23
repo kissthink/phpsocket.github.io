@@ -1,74 +1,458 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Phpsocket.github.io : phpsocket.github.io">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <title>PHP: Sockets - Manual </title>
 
-    <title>Phpsocket.github.io</title>
-  </head>
+ <link rel="shortcut icon" href="http://cn2.php.net/favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="http://cn2.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="http://cn2.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
 
-  <body>
+ <link rel="canonical" href="http://php.net/manual/zh/book.sockets.php">
+ <link rel="shorturl" href="http://php.net/sockets">
+ <link rel="alternate" href="http://php.net/sockets" hreflang="x-default">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/phpsocket">View on GitHub</a>
+ <link rel="contents" href="http://cn2.php.net/manual/zh/index.php">
+ <link rel="index" href="http://cn2.php.net/manual/zh/refs.remote.other.php">
+ <link rel="prev" href="http://cn2.php.net/manual/zh/class.snmpexception.php">
+ <link rel="next" href="http://cn2.php.net/manual/zh/intro.sockets.php">
 
-          <h1 id="project_title">Phpsocket.github.io</h1>
-          <h2 id="project_tagline">phpsocket.github.io</h2>
+ <link rel="alternate" href="http://cn2.php.net/manual/en/book.sockets.php" hreflang="en">
+ <link rel="alternate" href="http://cn2.php.net/manual/pt_BR/book.sockets.php" hreflang="pt_BR">
+ <link rel="alternate" href="http://cn2.php.net/manual/zh/book.sockets.php" hreflang="zh">
+ <link rel="alternate" href="http://cn2.php.net/manual/fr/book.sockets.php" hreflang="fr">
+ <link rel="alternate" href="http://cn2.php.net/manual/de/book.sockets.php" hreflang="de">
+ <link rel="alternate" href="http://cn2.php.net/manual/it/book.sockets.php" hreflang="it">
+ <link rel="alternate" href="http://cn2.php.net/manual/ja/book.sockets.php" hreflang="ja">
+ <link rel="alternate" href="http://cn2.php.net/manual/ro/book.sockets.php" hreflang="ro">
+ <link rel="alternate" href="http://cn2.php.net/manual/ru/book.sockets.php" hreflang="ru">
+ <link rel="alternate" href="http://cn2.php.net/manual/es/book.sockets.php" hreflang="es">
+ <link rel="alternate" href="http://cn2.php.net/manual/tr/book.sockets.php" hreflang="tr">
 
-        </header>
+<link rel="stylesheet" type="text/css" href="http://cn2.php.net/cached.php?t=1401250819&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://cn2.php.net/cached.php?t=1404368420&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://cn2.php.net/cached.php?t=1409978429&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://cn2.php.net/cached.php?t=1401249623&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="http://cn2.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script type="text/javascript">
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="http://cn2.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script type="text/javascript" src="http://cn2.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base href="http://cn2.php.net/manual/zh/book.sockets.php">
+
+</head>
+<body class="docs ">
+
+<nav id="head-nav" class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <a href="http://cn2.php.net/" class="brand"><img src="http://cn2.php.net/images/logo.php" width="48" height="24" alt="php"></a>
+    <div id="mainmenu-toggle-overlay"></div>
+    <input type="checkbox" id="mainmenu-toggle">
+    <ul class="nav">
+      <li class=""><a href="http://cn2.php.net/downloads">Downloads</a></li>
+      <li class="active"><a href="http://cn2.php.net/docs.php">Documentation</a></li>
+      <li class=""><a href="http://cn2.php.net/get-involved" >Get Involved</a></li>
+      <li class=""><a href="http://cn2.php.net/support">Help</a></li>
+    </ul>
+    <form class="navbar-search" id="topsearch" action="http://cn2.php.net/search.php">
+      <input type="hidden" name="show" value="quickref">
+      <input type="search" name="pattern" class="search-query" placeholder="Search" accesskey="s">
+    </form>
+  </div>
+  <div id="flash-message"></div>
+</nav>
+<nav id="trick"><div><dl>
+<dt><a href='/manual/en/getting-started.php'>Getting Started</a></dt>
+  <dd><a href='/manual/en/introduction.php'>Introduction</a></dd>
+  <dd><a href='/manual/en/tutorial.php'>A simple tutorial</a></dd>
+<dt><a href='/manual/en/langref.php'>Language Reference</a></dt>
+  <dd><a href='/manual/en/language.basic-syntax.php'>Basic syntax</a></dd>
+  <dd><a href='/manual/en/language.types.php'>Types</a></dd>
+  <dd><a href='/manual/en/language.variables.php'>Variables</a></dd>
+  <dd><a href='/manual/en/language.constants.php'>Constants</a></dd>
+  <dd><a href='/manual/en/language.expressions.php'>Expressions</a></dd>
+  <dd><a href='/manual/en/language.operators.php'>Operators</a></dd>
+  <dd><a href='/manual/en/language.control-structures.php'>Control Structures</a></dd>
+  <dd><a href='/manual/en/language.functions.php'>Functions</a></dd>
+  <dd><a href='/manual/en/language.oop5.php'>Classes and Objects</a></dd>
+  <dd><a href='/manual/en/language.namespaces.php'>Namespaces</a></dd>
+  <dd><a href='/manual/en/language.exceptions.php'>Exceptions</a></dd>
+  <dd><a href='/manual/en/language.generators.php'>Generators</a></dd>
+  <dd><a href='/manual/en/language.references.php'>References Explained</a></dd>
+  <dd><a href='/manual/en/reserved.variables.php'>Predefined Variables</a></dd>
+  <dd><a href='/manual/en/reserved.exceptions.php'>Predefined Exceptions</a></dd>
+  <dd><a href='/manual/en/reserved.interfaces.php'>Predefined Interfaces and Classes</a></dd>
+  <dd><a href='/manual/en/context.php'>Context options and parameters</a></dd>
+  <dd><a href='/manual/en/wrappers.php'>Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href='/manual/en/security.php'>Security</a></dt>
+  <dd><a href='/manual/en/security.intro.php'>Introduction</a></dd>
+  <dd><a href='/manual/en/security.general.php'>General considerations</a></dd>
+  <dd><a href='/manual/en/security.cgi-bin.php'>Installed as CGI binary</a></dd>
+  <dd><a href='/manual/en/security.apache.php'>Installed as an Apache module</a></dd>
+  <dd><a href='/manual/en/security.filesystem.php'>Filesystem Security</a></dd>
+  <dd><a href='/manual/en/security.database.php'>Database Security</a></dd>
+  <dd><a href='/manual/en/security.errors.php'>Error Reporting</a></dd>
+  <dd><a href='/manual/en/security.globals.php'>Using Register Globals</a></dd>
+  <dd><a href='/manual/en/security.variables.php'>User Submitted Data</a></dd>
+  <dd><a href='/manual/en/security.magicquotes.php'>Magic Quotes</a></dd>
+  <dd><a href='/manual/en/security.hiding.php'>Hiding PHP</a></dd>
+  <dd><a href='/manual/en/security.current.php'>Keeping Current</a></dd>
+<dt><a href='/manual/en/features.php'>Features</a></dt>
+  <dd><a href='/manual/en/features.http-auth.php'>HTTP authentication with PHP</a></dd>
+  <dd><a href='/manual/en/features.cookies.php'>Cookies</a></dd>
+  <dd><a href='/manual/en/features.sessions.php'>Sessions</a></dd>
+  <dd><a href='/manual/en/features.xforms.php'>Dealing with XForms</a></dd>
+  <dd><a href='/manual/en/features.file-upload.php'>Handling file uploads</a></dd>
+  <dd><a href='/manual/en/features.remote-files.php'>Using remote files</a></dd>
+  <dd><a href='/manual/en/features.connection-handling.php'>Connection handling</a></dd>
+  <dd><a href='/manual/en/features.persistent-connections.php'>Persistent Database Connections</a></dd>
+  <dd><a href='/manual/en/features.safe-mode.php'>Safe Mode</a></dd>
+  <dd><a href='/manual/en/features.commandline.php'>Command line usage</a></dd>
+  <dd><a href='/manual/en/features.gc.php'>Garbage Collection</a></dd>
+  <dd><a href='/manual/en/features.dtrace.php'>DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href='/manual/en/funcref.php'>Function Reference</a></dt>
+  <dd><a href='/manual/en/refs.basic.php.php'>Affecting PHP's Behaviour</a></dd>
+  <dd><a href='/manual/en/refs.utilspec.audio.php'>Audio Formats Manipulation</a></dd>
+  <dd><a href='/manual/en/refs.remote.auth.php'>Authentication Services</a></dd>
+  <dd><a href='/manual/en/refs.utilspec.cmdline.php'>Command Line Specific Extensions</a></dd>
+  <dd><a href='/manual/en/refs.compression.php'>Compression and Archive Extensions</a></dd>
+  <dd><a href='/manual/en/refs.creditcard.php'>Credit Card Processing</a></dd>
+  <dd><a href='/manual/en/refs.crypto.php'>Cryptography Extensions</a></dd>
+  <dd><a href='/manual/en/refs.database.php'>Database Extensions</a></dd>
+  <dd><a href='/manual/en/refs.calendar.php'>Date and Time Related Extensions</a></dd>
+  <dd><a href='/manual/en/refs.fileprocess.file.php'>File System Related Extensions</a></dd>
+  <dd><a href='/manual/en/refs.international.php'>Human Language and Character Encoding Support</a></dd>
+  <dd><a href='/manual/en/refs.utilspec.image.php'>Image Processing and Generation</a></dd>
+  <dd><a href='/manual/en/refs.remote.mail.php'>Mail Related Extensions</a></dd>
+  <dd><a href='/manual/en/refs.math.php'>Mathematical Extensions</a></dd>
+  <dd><a href='/manual/en/refs.utilspec.nontext.php'>Non-Text MIME Output</a></dd>
+  <dd><a href='/manual/en/refs.fileprocess.process.php'>Process Control Extensions</a></dd>
+  <dd><a href='/manual/en/refs.basic.other.php'>Other Basic Extensions</a></dd>
+  <dd><a href='/manual/en/refs.remote.other.php'>Other Services</a></dd>
+  <dd><a href='/manual/en/refs.search.php'>Search Engine Extensions</a></dd>
+  <dd><a href='/manual/en/refs.utilspec.server.php'>Server Specific Extensions</a></dd>
+  <dd><a href='/manual/en/refs.basic.session.php'>Session Extensions</a></dd>
+  <dd><a href='/manual/en/refs.basic.text.php'>Text Processing</a></dd>
+  <dd><a href='/manual/en/refs.basic.vartype.php'>Variable and Type Related Extensions</a></dd>
+  <dd><a href='/manual/en/refs.webservice.php'>Web Services</a></dd>
+  <dd><a href='/manual/en/refs.utilspec.windows.php'>Windows Only Extensions</a></dd>
+  <dd><a href='/manual/en/refs.xml.php'>XML Manipulation</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="clearfix">
+          <div class="next">
+        <a href="intro.sockets.php">
+          简介 &raquo;
+        </a>
+      </div>
+              <div class="prev">
+        <a href="class.snmpexception.php">
+          &laquo; SNMPException        </a>
+      </div>
+        <ul class="breadcrumbs-container">
+            <li><a href='index.php'>PHP 手册</a></li>      <li><a href='funcref.php'>函数参考</a></li>      <li><a href='refs.remote.other.php'>Sockets编程</a></li>    </ul>
+  </div>
+
+
+
+
+<div id="layout">
+  <section id="layout-content">
+  <div class="page-tools">
+    <div class="change-language">
+      <form action="http://cn2.php.net/manual/change.php" method="get" id="changelang" name="changelang">
+        <fieldset>
+          <label for="changelang-langs">Change language:</label>
+          <select onchange="document.changelang.submit()" name="page" id="changelang-langs">
+            <option value='en/book.sockets.php'>English</option>
+            <option value='pt_BR/book.sockets.php'>Brazilian Portuguese</option>
+            <option value='zh/book.sockets.php' selected="selected">Chinese (Simplified)</option>
+            <option value='fr/book.sockets.php'>French</option>
+            <option value='de/book.sockets.php'>German</option>
+            <option value='it/book.sockets.php'>Italian</option>
+            <option value='ja/book.sockets.php'>Japanese</option>
+            <option value='ro/book.sockets.php'>Romanian</option>
+            <option value='ru/book.sockets.php'>Russian</option>
+            <option value='es/book.sockets.php'>Spanish</option>
+            <option value='tr/book.sockets.php'>Turkish</option>
+            <option value="help-translate.php">Other</option>
+          </select>
+        </fieldset>
+      </form>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+    <div class="edit-bug">
+      <a href="https://edit.php.net/?project=PHP&amp;perm=zh/book.sockets.php">Edit</a>
+      <a href="https://bugs.php.net/report.php?bug_type=Documentation+problem&amp;manpage=book.sockets">Report a Bug</a>
     </div>
+  </div><div id="book.sockets" class="book">
+ 
+ <h1 class="title">Sockets</h1>
+ 
+ 
+ 
+ 
+ 
+ 
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+<ul class="chunklist chunklist_book"><li><a href="intro.sockets.php">简介</a></li><li><a href="sockets.setup.php">安装／配置</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="sockets.requirements.php">需求</a></li><li><a href="sockets.installation.php">安装</a></li><li><a href="sockets.configuration.php">运行时配置</a></li><li><a href="sockets.resources.php">资源类型</a></li></ul></li><li><a href="sockets.constants.php">预定义常量</a></li><li><a href="sockets.examples.php">范例</a></li><li><a href="sockets.errors.php">Socket Errors</a></li><li><a href="ref.sockets.php">Socket 函数</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="function.socket-accept.php">socket_accept</a> — Accepts a connection on a socket</li><li><a href="function.socket-bind.php">socket_bind</a> — 给套接字绑定名字</li><li><a href="function.socket-clear-error.php">socket_clear_error</a> — Clears the error on the socket or the last error code</li><li><a href="function.socket-close.php">socket_close</a> — 关闭套接字资源</li><li><a href="function.socket-cmsg-space.php">socket_cmsg_space</a> — Calculate message buffer size</li><li><a href="function.socket-connect.php">socket_connect</a> — 开启一个套接字连接</li><li><a href="function.socket-create-listen.php">socket_create_listen</a> — Opens a socket on port to accept connections</li><li><a href="function.socket-create-pair.php">socket_create_pair</a> — Creates a pair of indistinguishable sockets and stores them in an array</li><li><a href="function.socket-create.php">socket_create</a> — 创建一个套接字（通讯节点）</li><li><a href="function.socket-get-option.php">socket_get_option</a> — Gets socket options for the socket</li><li><a href="function.socket-getpeername.php">socket_getpeername</a> — Queries the remote side of the given socket which may either result in host/port or in a Unix filesystem path, dependent on its type</li><li><a href="function.socket-getsockname.php">socket_getsockname</a> — Queries the local side of the given socket which may either result in host/port or in a Unix filesystem path, dependent on its type</li><li><a href="function.socket-import-stream.php">socket_import_stream</a> — Import a stream</li><li><a href="function.socket-last-error.php">socket_last_error</a> — Returns the last error on the socket</li><li><a href="function.socket-listen.php">socket_listen</a> — Listens for a connection on a socket</li><li><a href="function.socket-read.php">socket_read</a> — Reads a maximum of length bytes from a socket</li><li><a href="function.socket-recv.php">socket_recv</a> — Receives data from a connected socket</li><li><a href="function.socket-recvfrom.php">socket_recvfrom</a> — Receives data from a socket whether or not it is connection-oriented</li><li><a href="function.socket-recvmsg.php">socket_recvmsg</a> — Read a message</li><li><a href="function.socket-select.php">socket_select</a> — Runs the select() system call on the given arrays of sockets with a specified timeout</li><li><a href="function.socket-send.php">socket_send</a> — Sends data to a connected socket</li><li><a href="function.socket-sendmsg.php">socket_sendmsg</a> — Send a message</li><li><a href="function.socket-sendto.php">socket_sendto</a> — Sends a message to a socket, whether it is connected or not</li><li><a href="function.socket-set-block.php">socket_set_block</a> — Sets blocking mode on a socket resource</li><li><a href="function.socket-set-nonblock.php">socket_set_nonblock</a> — Sets nonblocking mode for file descriptor fd</li><li><a href="function.socket-set-option.php">socket_set_option</a> — Sets socket options for the socket</li><li><a href="function.socket-shutdown.php">socket_shutdown</a> — Shuts down a socket for receiving, sending, or both</li><li><a href="function.socket-strerror.php">socket_strerror</a> — Return a string describing a socket error</li><li><a href="function.socket-write.php">socket_write</a> — Write to a socket</li></ul></li></ul></div>
+<section id="usernotes">
+ <div class="head">
+  <span class="action"><a href="http://cn2.php.net/manual/add-note.php?sect=book.sockets&amp;redirect=http://cn2.php.net/manual/zh/book.sockets.php"><img src='/images/notes-add@2x.png' alt='add a note' width='12' height='12'> <small>add a note</small></a></span>
+  <h3 class="title">User Contributed Notes </h3>
+ </div>
+ <div class="note">There are no user contributed notes for this page.</div></section>    </section><!-- layout-content -->
+        <aside class='layout-menu'>
+    
+        <ul class='parent-menu-list'>
+                        <li>
+                <a href="refs.remote.other.php">其它服务</a>
+    
+                                    <ul class='child-menu-list'>
+    
+                          
+                        <li class="">
+                            <a href="book.chdb.php" title="chdb">chdb</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.curl.php" title="cURL">cURL</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.event.php" title="Event">Event</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.fam.php" title="FAM">FAM</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.ftp.php" title="FTP">FTP</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.gearman.php" title="Gearman">Gearman</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.net-gopher.php" title="Gopher">Gopher</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.gupnp.php" title="Gupnp">Gupnp</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.http.php" title="HTTP">HTTP</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.hwapi.php" title="Hyperwave API">Hyperwave API</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.ldap.php" title="LDAP">LDAP</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.memcache.php" title="Memcache">Memcache</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.memcached.php" title="Memcached">Memcached</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.mqseries.php" title="mqseries">mqseries</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.network.php" title="网络">网络</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.rrd.php" title="RRD">RRD</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.sam.php" title="SAM">SAM</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.snmp.php" title="SNMP">SNMP</a>
+                        </li>
+                          
+                        <li class="current">
+                            <a href="book.sockets.php" title="Sockets">Sockets</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.ssh2.php" title="SSH2">SSH2</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.stomp.php" title="Stomp">Stomp</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.svm.php" title="SVM">SVM</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.svn.php" title="SVN">SVN</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.tcpwrap.php" title="TCP">TCP</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.varnish.php" title="Varnish">Varnish</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.yaz.php" title="YAZ">YAZ</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.nis.php" title="YP/NIS">YP/NIS</a>
+                        </li>
+                          
+                        <li class="">
+                            <a href="book.zmq.php" title="0MQ messaging">0MQ messaging</a>
+                        </li>
+                            
+                    </ul>
+                    
+            </li>
+                    </ul>
+    </aside>
+
+
+  </div><!-- layout -->
+         
+  <footer>
+    <div class="container footer-content">
+      <div class="row-fluid">
+      <ul class="footmenu">
+        <li><a href="http://cn2.php.net/copyright.php">Copyright &copy; 2001-2014 The PHP Group</a></li>
+        <li><a href="http://phpsocket.com/">phpsocket.com</a></li>
+        <li><a href="http://leipi.org/">leipi.org</a></li>
+      </ul>
+      </div>
     </div>
+  </footer>
 
     
+ <!-- External and third party libraries. -->
+ <script type="text/javascript" src="http://cn2.php.net//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://cn2.php.net/cached.php?t=1387527612&amp;f=/js/ext/modernizr.js"></script>
+<script type="text/javascript" src="http://cn2.php.net/cached.php?t=1385000409&amp;f=/js/ext/hogan-2.0.0.min.js"></script>
+<script type="text/javascript" src="http://cn2.php.net/cached.php?t=1389722415&amp;f=/js/ext/typeahead.min.js"></script>
+<script type="text/javascript" src="http://cn2.php.net/cached.php?t=1388312428&amp;f=/js/ext/mousetrap.min.js"></script>
+<script type="text/javascript" src="http://cn2.php.net/cached.php?t=1403329231&amp;f=/js/search.js"></script>
+<script type="text/javascript" src="http://cn2.php.net/cached.php?t=1410183606&amp;f=/js/common.js"></script>
 
-  </body>
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="http://cn2.php.net/images/to-top@2x.png"></a>
+
+</body>
 </html>
