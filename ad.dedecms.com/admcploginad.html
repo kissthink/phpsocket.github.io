@@ -1,0 +1,34 @@
+
+function getElementsByClassName(node,classname) {
+  if (node.getElementsByClassName) { // use native implementation if available
+    return node.getElementsByClassName(classname);
+  } else {
+    return (function getElementsByClass(searchClass,node) {
+        if ( node == null )
+          node = document;
+        var classElements = [],
+            els = node.getElementsByTagName("*"),
+            elsLen = els.length,
+            pattern = new RegExp("(^|\s)"+searchClass+"(\s|$)"), i, j;
+
+        for (i = 0, j = 0; i < elsLen; i++) {
+          if ( pattern.test(els[i].className) ) {
+              classElements[j] = els[i];
+              j++;
+          }
+        }
+        return classElements;
+    })(classname, node);
+  }
+}
+var isIE6= /msie 6/i.test(navigator.userAgent);
+var adtext = "<ins style=\"display:inline-table;border:none;width:640px;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:100%\"> <ins id=\"aswift_1_anchor\" style=\"display:block;border:none;width:640px;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:100%\"> <iframe src=\"http://zz.dedecms.com/pos/v57login.html\" frameborder=\"0\"  allowtransparency=\"true\" frameborder=\"0\" width=\"640\" height=\"60\" hspace=\"0\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" vspace=\"0\" width=\"100%\" id=\"dedebaodiao_1\" name=\"dedebaodiao_1\"><\/iframe></ins></ins>";   
+var elements = getElementsByClassName(document, 'dede-ad'),
+       n = elements.length;
+for (var i = 0; i < n; i++) {
+    var e = elements[i];
+    e.style.width='640px';
+    e.style.margin='10px 0';
+    e.style.border='none';
+    !isIE6? e.innerHTML=adtext : document.write(adtext);
+}
